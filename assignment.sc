@@ -198,26 +198,20 @@ assert( noOfPaths ( 10, 10 ) == 184756)
 //12
 val digits = List(0,1,2,3,4,5,6,7,8,9)
 val count = 1000000
-
 def factorial(n:Int):Int = {
-
   if(n == 0)
     return 1
-
   return n*factorial(n-1)
 }
 
 def remove(num: Int, list: List[Int]) = list diff List(num)
-
-
-def millionth(list: List[Int], currcount: Int): List[Int] = {
-  val permut = factorial(list.length - 1)
-  val i = (count - currcount) / permut
-  val next = currcount + i * permut
+def millionth(list: List[Int], currcount: Int):List[Int]={
+  val permut=factorial(list.length - 1)
+  val i=(count-currcount)/permut
   list.length match {
-    case 2 if count - currcount == 0 => list
-    case 2 if count - currcount == 1 => list.reverse
-    case _ => list(i) :: millionth(remove(list(i),list), next)
+    case 2 if count-currcount == 0 => list
+    case 2 if count-currcount == 1 => list.reverse
+    case _ => list(i)::millionth(remove(list(i),list),currcount+i*permut)
   }
 }
 
